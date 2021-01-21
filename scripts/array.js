@@ -39,5 +39,16 @@ var spliced = arrSlice.slice(1, 5); // [start, end)
 
 var splicedMins = arrSlice.slice(2, -2);
 
-console.log(arrSlice, "original array");
-console.log(splicedMins, "modyfied");
+// console.log(arrSlice, "original array");
+// console.log(splicedMins, "modyfied");
+
+// Splice method
+var arrSpliced = [6, 45, 5, 5, "a", "b", "hi"];
+
+var spliced = arrSpliced.splice(2, 3);
+var spliced1 = arrSpliced.splice(0, 0, "Hello");
+var spliced2 = arrSpliced.splice(-2, 0, 6, 96);
+arrSpliced.splice(3);
+
+console.log(arrSpliced, "original array");
+console.log(spliced, "modyfied");
