@@ -31,4 +31,13 @@ var lastIndex = arr.lastIndexOf(5);
 //console.log(lastIndex);
 
 var concatedArr = arr.concat(arr4);
-console.log(concatedArr);
+//console.log(concatedArr);
+
+// slice method
+var arrSlice = [6, 45, 5, 5, "a", "b", "hi"];
+var spliced = arrSlice.slice(1, 5); // [start, end)
+
+var splicedMins = arrSlice.slice(2, -2);
+
+console.log(arrSlice, "original array");
+console.log(splicedMins, "modyfied");
