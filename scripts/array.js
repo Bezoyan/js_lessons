@@ -50,5 +50,35 @@ var spliced1 = arrSpliced.splice(0, 0, "Hello");
 var spliced2 = arrSpliced.splice(-2, 0, 6, 96);
 arrSpliced.splice(3);
 
-console.log(arrSpliced, "original array");
-console.log(spliced, "modyfied");
+// console.log(arrSpliced, "original array");
+// console.log(spliced, "modyfied");
+
+// array with object
+var arrObj = [
+  6,
+  45,
+  5,
+  5,
+  (user = {
+    name: {
+      firtName: "Anna",
+    },
+    age: 14,
+    gender: "female",
+    isWorking: false,
+    hobbies: ["Dancing", "singing", "cooking"],
+  }),
+];
+//console.log(arrObj);
+
+// var foundEl = arrObj.find((element) => element > 24);
+var foundEl = arrObj.find((arrObject, index, array) => {
+  return arrObject.gender === "male";
+});
+//console.log(foundEl);
+
+var foundIndex = arrObj.findIndex((arrObject, index, arrays) => {
+  return arrObject.gender === "female";
+});
+
+console.log(foundIndex);
