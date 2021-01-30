@@ -81,4 +81,17 @@ var foundIndex = arrObj.findIndex((arrObject, index, arrays) => {
   return arrObject.gender === "female";
 });
 
-console.log(foundIndex);
+//console.log(foundIndex);
+
+// Sparse Array
+let sparseArr = new Array(4);
+
+let sparseArr1 = [];
+sparseArr1[1000] = 0;
+
+let sparseArr2 = [1, , , 4];
+console.log(sparseArr2);
+
+for (let i = 0; i < sparseArr2.length; ++i) {
+  console.log(i);
+}
