@@ -61,3 +61,30 @@ function cloneDeep(arr) {
 //console.log(cloneDeep([4, 5, 8, 45]));
 
 // exapml of anagrama - cinema - iceman
+function validAnagram(str1, str2) {
+  if (str1.length !== str2.length) {
+    return false;
+  }
+
+  const lookup = {};
+  for (let i = 0; i < str1.length; ++i) {
+    let letters = str1[i];
+    // if letter exisit increment else set to 1
+    lookup[letters] ? (lookup[letters] += 1) : (lookup[letters] = 1);
+  }
+  for (let i = 0; i < str2.length; ++i) {
+    let letters = str2[i];
+    if (!lookup[letters]) {
+      return false;
+    } else {
+      lookup[letters] -= 1;
+    }
+  }
+
+  return true;
+}
+
+console.log(validAnagram("abc", "abc"));
+console.log(validAnagram("", ""));
+console.log(validAnagram("abcd", "abc"));
+console.log(validAnagram("aac", "cca"));
