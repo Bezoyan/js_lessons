@@ -1,49 +1,49 @@
+// // function foo() {
+// //   let text = "Closure";
+// //   function bar() {
+// //     console.log(text);
+// //   }
+// //   bar();
+// // }
+
+// // foo();
+
 // function foo() {
 //   let text = "Closure";
 //   function bar() {
 //     console.log(text);
 //   }
-//   bar();
+//   return bar();
 // }
 
-// foo();
+// let myFoo = foo;
 
-function foo() {
-  let text = "Closure";
-  function bar() {
-    console.log(text);
-  }
-  return bar();
-}
+// myFoo();
 
-let myFoo = foo;
+// function sum(a) {
+//   return function (b) {
+//     return a + b;
+//   };
+// }
 
-myFoo();
+// let add1 = sum(6);
+// let add2 = sum(add1(3));
+// // let add3 = sum(add2(5));
 
-function sum(a) {
-  return function (b) {
-    return a + b;
-  };
-}
+// //console.log(add1(6));
+// //console.log(add2(9));
+// // console.log(add3(3));
 
-let add1 = sum(6);
-let add2 = sum(add1(3));
-// let add3 = sum(add2(5));
+// let e = 9;
+// function otherSum(a) {
+//   return function (b) {
+//     return function (c) {
+//       return function (d) {
+//         // local scope
+//         return a + b + c + d + e;
+//       };
+//     };
+//   };
+// }
 
-//console.log(add1(6));
-//console.log(add2(9));
-// console.log(add3(3));
-
-let e = 9;
-function otherSum(a) {
-  return function (b) {
-    return function (c) {
-      return function (d) {
-        // local scope
-        return a + b + c + d + e;
-      };
-    };
-  };
-}
-
-console.log(otherSum(5)(6)(7)(8));
+// console.log(otherSum(5)(6)(7)(8));
