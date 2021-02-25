@@ -1,22 +1,53 @@
 const button = document.querySelector("button");
 
-const promise = new Promise();
-console.log(promise);
+const getPosition = (args) => {
+  const promise = new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      (sucsses) => {
+        resolve(sucsses);
+      },
+      (error) => {
+        reject(error);
+      },
+      args
+    );
+  });
+  return promise;
+};
+
+const setTimer = (duraction) => {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Done!");
+    }, duraction);
+  });
+  return promise;
+};
 
 function trackUserLoction() {
-  navigator.geolocation.getCurrentPosition(
-    (posData) => {
-      setTimeout(() => {
-        console.log(posData);
-      }, 2000);
-    },
-    (error) => {
-      console.log(error);
-    }
-  );
-  setTimeout(() => {
-    console.log("Helloo User");
-  }, 0);
+  let positionData;
+  getPosition()
+    .then(
+      (posData) => {
+        positionData = posData;
+        return setTimer(2000);
+      }
+      // (err) => {
+      //   console.log(err);
+      // }
+    )
+    .catch((err) => {
+      console.log(err);
+    })
+    .then((data) => {
+      console.log(data, positionData);
+    })
+    .finally(() => {
+      console.log("all is done");
+    });
+  setTimer(1000).then(() => {
+    console.log("Hellooo Timer");
+  });
   console.log("Without settimout");
 }
 
