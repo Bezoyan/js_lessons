@@ -24,31 +24,39 @@ const setTimer = (duraction) => {
   return promise;
 };
 
-function trackUserLoction() {
-  let positionData;
-  getPosition()
-    .then(
-      (posData) => {
-        positionData = posData;
-        return setTimer(2000);
-      }
-      // (err) => {
-      //   console.log(err);
-      // }
-    )
-    .catch((err) => {
-      console.log(err);
-    })
-    .then((data) => {
-      console.log(data, positionData);
-    })
-    .finally(() => {
-      console.log("all is done");
-    });
-  setTimer(1000).then(() => {
-    console.log("Hellooo Timer");
-  });
-  console.log("Without settimout");
+async function trackUserLoction() {
+  //let positionData;
+  let posData;
+  let timeData;
+  try {
+    posData = await getPosition();
+    timeData = await setTimer(2000);
+  } catch (err) {
+    console.log(err);
+  }
+  console.log(posData, timeData);
+  // .then(
+  //   (posData) => {
+  //     positionData = posData;
+  //     return setTimer(2000);
+  //   }
+  //   // (err) => {
+  //   //   console.log(err);
+  //   // }
+  // )
+  // .catch((err) => {
+  //   console.log(err);
+  // })
+  // .then((data) => {
+  //   console.log(data, positionData);
+  // })
+  //   .finally(() => {
+  //     console.log("all is done");
+  //   });
+  // setTimer(1000).then(() => {
+  //   console.log("Hellooo Timer");
+  // });
+  // console.log("Without settimout");
 }
 
 button.addEventListener("click", trackUserLoction);
@@ -66,7 +74,7 @@ button.addEventListener("click", trackUserLoction);
 //     setTimeout(function () {
 //       console.log(2);
 //     }, 1000);
-//     setTimeout(function () {
+//     setTimeout(function ()
 //       console.log(3);
 //     }, 0);
 //     console.log(4);
