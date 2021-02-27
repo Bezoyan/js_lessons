@@ -32,9 +32,9 @@ async function trackUserLoction() {
     posData = await getPosition();
     timeData = await setTimer(2000);
   } catch (err) {
-    console.log(err);
+    //console.log(err);
   }
-  console.log(posData, timeData);
+  //console.log(posData, timeData);
   // .then(
   //   (posData) => {
   //     positionData = posData;
@@ -61,13 +61,19 @@ async function trackUserLoction() {
 
 button.addEventListener("click", trackUserLoction);
 
-// let result = 0;
+// Promise Methods
 
-// for (let i = 0; i < 10000000; ++i) {
-//   result += i;
-// }
+Promise.race([getPosition(), setTimer(3000)]).then((data) => {
+  console.log(data);
+});
 
-// console.log(result);
+Promise.all([getPosition(), setTimer(3000)]).then((promiseData) => {
+  console.log(promiseData);
+});
+
+Promise.allSettled([getPosition(), setTimer(3000)]).then((promiseData) => {
+  console.log(promiseData);
+});
 
 // (function () {
 //     console.log(1);
