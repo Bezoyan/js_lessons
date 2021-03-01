@@ -88,18 +88,25 @@ const renderNewMovieElement = (id, title, imageUrl, rating) => {
 
 const addMovieHandler = () => {
   const movieTitle = userInputs[0].value;
-  const movieImageUrl = userInputs[1].value;
-  const movieRating = parseInt(userInputs[2].value);
-  console.log(typeof movieRating);
+  let movieImageUrl = userInputs[1].value;
+  // checking if input contains not allowed symbols
+  const reg1 = /[ '"<>{}]|(\\)/g;
+  let movieRating = userInputs[2].value;
+  // checking if input contains 'e' symbol
+  const reg2 = /e/g;
+  // console.log(typeof movieRating);
   if (
     movieTitle.trim() === "" ||
     movieImageUrl.trim() === "" ||
     movieRating < 1 ||
-    movieRating > 5
+    movieRating > 5 ||
+    reg1.test(movieImageUrl) == true ||
+    reg2.test(movieRating) == true
   ) {
     alert("Please input valid value");
     return;
   }
+  userInputs[2] = parseInt(userInputs[2].value);
   const newMovie = {
     id: Math.random().toString(),
     title: movieTitle,
