@@ -5,34 +5,58 @@ const fetchBtn = document.querySelector("#available-posts button");
 const postList = document.querySelector("ul");
 
 function sendHTTPRequest(method, url, data) {
-  const promise = new Promise((resolve, reject) => {
-    const httpRq = new XMLHttpRequest();
+  // const promise = new Promise((resolve, reject) => {
+  const httpRq = new XMLHttpRequest();
+  // httpRq.setRequestHeader("Content-Type", "appliction/json");
+  // httpRq.setRequestHeader("Content-Type", "appliction/json");
+  // httpRq.open(method, url);
+  // httpRq.responseType = "json";
+  // httpRq.onload = function () {
+  //   //const postList = JSON.parse(httpRq.response);
+  //   if (httpRq.status >= 200 && httpRq.status < 300) {
+  //     resolve(httpRq.response);
+  //   } else {
+  //     reject(new Error("Somthig went worng"));
+  //   }
+  // };
+  // httpRq.onerror = function () {
+  //   reject(new Error("Somthig went worng"));
+  // };
+  // httpRq.send(JSON.stringify(data));
+  // });
+  // return promise;
 
-    httpRq.open(method, url);
-
-    httpRq.responseType = "json";
-
-    httpRq.onload = function () {
-      //const postList = JSON.parse(httpRq.response);
-      if (httpRq.status >= 200 && httpRq.status < 300) {
-        resolve(httpRq.response);
+  return fetch(url, {
+    method: method,
+    body: data,
+    //body: JSON.stringify(data),
+    // headers: {
+    //   "Content-Type": "appliction/json",
+    // },
+  })
+    .then((response) => {
+      // response.text()
+      // response.blob();
+      if (response.status >= 200 && response.status < 300) {
+        return response.json();
       } else {
-        reject(new Error("Somthig went worng"));
+        response.json().then((errData) => {
+          console.log(errData);
+          throw new Error("Somthing went worng - in server side");
+        });
       }
-    };
-    httpRq.onerror = function () {
-      reject(new Error("Somthig went worng"));
-    };
-    httpRq.send(JSON.stringify(data));
-  });
-  return promise;
+    })
+    .catch((err) => {
+      console.log(err);
+      throw new Error("Somthing went worng");
+    });
 }
 
 async function fetchPosts() {
   try {
     const respnonsData = await sendHTTPRequest(
       "GET",
-      "https://jsonplaceholder.typicode.com/post"
+      "https://jsonplaceholder.typicode.com/pos"
     );
     const listOfPosts = respnonsData;
     for (const post of listOfPosts) {
@@ -55,7 +79,12 @@ async function createPost(title, content) {
     userId: userId,
   };
 
-  sendHTTPRequest("POST", "https://jsonplaceholder.typicode.com/posts", post);
+  const fd = new FormData(form);
+  // fd.append("title", title);
+  // fd.append("body", content);
+  fd.append("userId", userId);
+
+  sendHTTPRequest("POST", "https://jsonplaceholder.typicode.com/posts", fd);
 }
 
 fetchBtn.addEventListener("click", fetchPosts);
